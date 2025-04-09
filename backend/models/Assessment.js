@@ -1,81 +1,46 @@
 const mongoose = require('mongoose');
 
-const assessmentSchema = new mongoose.Schema({
+const AssessmentSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'Please provide a title for the assessment'],
+    required: [true, 'Please add a title'],
+    trim: true,
+    maxlength: [50, 'Title cannot be more than 50 characters']
   },
   description: {
     type: String,
-    required: [true, 'Please provide a description'],
+    required: [true, 'Please add a description'],
+    maxlength: [500, 'Description cannot be more than 500 characters']
   },
-  skill: {
-    type: String,
-    required: [true, 'Please specify the skill being assessed'],
-  },
-  difficulty: {
-    type: String,
-    enum: ['beginner', 'intermediate', 'advanced'],
-    required: [true, 'Please specify the difficulty level'],
-  },
-  problemStatement: {
-    type: String,
-    required: [true, 'Please provide the problem statement'],
-  },
-  testCases: [
+  questions: [
     {
-      input: {
+      questionText: {
         type: String,
-        required: true,
+        required: [true, 'Please add a question text']
       },
-      expectedOutput: {
-        type: String,
-        required: true,
+      options: {
+        type: [String],
+        required: [true, 'Please add options']
       },
-    },
+      correctAnswer: {
+        type: Number,
+        required: [true, 'Please add a correct answer']
+      }
+    }
   ],
   timeLimit: {
-    type: Number, // in minutes
-    required: [true, 'Please specify the time limit'],
+    type: Number,
+    default: 30 // Default time limit in minutes
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
-  submissions: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      },
-      code: {
-        type: String,
-        required: true,
-      },
-      score: {
-        type: Number,
-        required: true,
-      },
-      feedback: {
-        type: String,
-        required: true,
-      },
-      timeComplexity: {
-        type: String,
-        required: true,
-      },
-      submittedAt: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('Assessment', assessmentSchema); 
+module.exports = mongoose.model('Assessment', AssessmentSchema); 
