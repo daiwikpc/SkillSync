@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Candidate from './pages/Candidate';
 import Employer from './pages/Employer';
 import Admin from './pages/Admin';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
             <Route path="/candidate" element={<Candidate />} />
             <Route path="/employer" element={<Employer />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin />} />
           </Routes>
         </main>
       </div>

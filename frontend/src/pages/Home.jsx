@@ -64,6 +64,20 @@ function Home() {
         >
           Start Your Journey
         </Link>
+        <div className="mt-6 flex justify-center space-x-4">
+          <Link
+            to="/signup"
+            className="text-indigo-600 hover:underline"
+          >
+            Sign Up
+          </Link>
+          <Link
+            to="/signin"
+            className="text-indigo-600 hover:underline"
+          >
+            Sign In
+          </Link>
+        </div>
       </section>
     </div>
   );
